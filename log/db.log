@@ -1,0 +1,59 @@
+D, [2015-07-22T10:41:10.618827 #5522] DEBUG -- :   [1m[36m (639.1ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+D, [2015-07-22T10:41:11.165262 #5522] DEBUG -- :   [1m[35m (480.9ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations`  ON `schema_migrations` (`version`) 
+D, [2015-07-22T10:41:11.166432 #5522] DEBUG -- :   [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+I, [2015-07-22T10:41:11.365499 #5522]  INFO -- : Migrating to CreatePrices (20150722000000)
+D, [2015-07-22T10:41:11.491010 #5522] DEBUG -- :   [1m[35m (122.3ms)[0m  CREATE TABLE `prices` (`id` int(11) auto_increment PRIMARY KEY, `country_id` int(11), `city_id` int(11), `region_id` int(11), `fuel_id` int(11), `station_id` int(11), `price` float, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+D, [2015-07-22T10:41:11.513653 #5522] DEBUG -- :   [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+D, [2015-07-22T10:41:11.531134 #5522] DEBUG -- :   [1m[35mSQL (0.4ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150722000000')
+D, [2015-07-22T10:41:11.557485 #5522] DEBUG -- :   [1m[36m (26.1ms)[0m  [1mCOMMIT[0m
+I, [2015-07-22T10:41:11.557576 #5522]  INFO -- : Migrating to CreateFuels (20150722000001)
+D, [2015-07-22T10:41:11.679683 #5522] DEBUG -- :   [1m[35m (119.5ms)[0m  CREATE TABLE `fuels` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+D, [2015-07-22T10:41:11.680453 #5522] DEBUG -- :   [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+D, [2015-07-22T10:41:11.681412 #5522] DEBUG -- :   [1m[35mSQL (0.5ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150722000001')
+D, [2015-07-22T10:41:11.690639 #5522] DEBUG -- :   [1m[36m (9.0ms)[0m  [1mCOMMIT[0m
+I, [2015-07-22T10:41:11.690738 #5522]  INFO -- : Migrating to CreateCountries (20150722000002)
+D, [2015-07-22T10:41:11.846108 #5522] DEBUG -- :   [1m[35m (152.1ms)[0m  CREATE TABLE `countries` (`id` int(11) auto_increment PRIMARY KEY, `iso2` varchar(255), `short_name` varchar(255), `long_name` varchar(255), `iso3` varchar(255), `numcode` varchar(255), `un_member` varchar(255), `calling_code` varchar(255), `cctld` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+D, [2015-07-22T10:41:11.846772 #5522] DEBUG -- :   [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+D, [2015-07-22T10:41:11.847741 #5522] DEBUG -- :   [1m[35mSQL (0.5ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150722000002')
+D, [2015-07-22T10:41:11.856801 #5522] DEBUG -- :   [1m[36m (8.9ms)[0m  [1mCOMMIT[0m
+I, [2015-07-22T10:41:11.856878 #5522]  INFO -- : Migrating to CreateCities (20150722000003)
+D, [2015-07-22T10:41:11.901592 #5522] DEBUG -- :   [1m[35m (41.7ms)[0m  CREATE TABLE `cities` (`id` int(11) auto_increment PRIMARY KEY, `country_id` int(11), `region_id` int(11), `name` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+D, [2015-07-22T10:41:11.902452 #5522] DEBUG -- :   [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+D, [2015-07-22T10:41:11.903660 #5522] DEBUG -- :   [1m[35mSQL (0.5ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150722000003')
+D, [2015-07-22T10:41:11.912704 #5522] DEBUG -- :   [1m[36m (8.7ms)[0m  [1mCOMMIT[0m
+I, [2015-07-22T10:41:11.912874 #5522]  INFO -- : Migrating to CreateRegions (20150722000004)
+D, [2015-07-22T10:41:40.353215 #5538] DEBUG -- :   [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+I, [2015-07-22T10:41:40.356595 #5538]  INFO -- : Migrating to CreateRegions (20150722000004)
+D, [2015-07-22T10:41:40.425178 #5538] DEBUG -- :   [1m[35m (65.4ms)[0m  CREATE TABLE `regions` (`id` int(11) auto_increment PRIMARY KEY, `country_id` int(11), `name` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+D, [2015-07-22T10:41:40.425978 #5538] DEBUG -- :   [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+D, [2015-07-22T10:41:40.464546 #5538] DEBUG -- :   [1m[35mSQL (36.4ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150722000004')
+D, [2015-07-22T10:41:40.491974 #5538] DEBUG -- :   [1m[36m (27.1ms)[0m  [1mCOMMIT[0m
+D, [2015-07-22T10:53:19.773277 #5864] DEBUG -- :   [1m[36m (114.6ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+D, [2015-07-22T10:53:20.117790 #5864] DEBUG -- :   [1m[35m (343.5ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations`  ON `schema_migrations` (`version`) 
+D, [2015-07-22T10:53:20.118959 #5864] DEBUG -- :   [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+I, [2015-07-22T10:53:20.120815 #5864]  INFO -- : Migrating to CreatePrices (20150722000000)
+D, [2015-07-22T10:53:20.294970 #5864] DEBUG -- :   [1m[35m (171.1ms)[0m  CREATE TABLE `prices` (`id` int(11) auto_increment PRIMARY KEY, `country_id` int(11), `city_id` int(11), `region_id` int(11), `fuel_id` int(11), `station_id` int(11), `price` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+D, [2015-07-22T10:53:20.297267 #5864] DEBUG -- :   [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+D, [2015-07-22T10:53:20.299400 #5864] DEBUG -- :   [1m[35mSQL (0.1ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150722000000')
+D, [2015-07-22T10:53:20.361378 #5864] DEBUG -- :   [1m[36m (61.7ms)[0m  [1mCOMMIT[0m
+I, [2015-07-22T10:53:20.361471 #5864]  INFO -- : Migrating to CreateFuels (20150722000001)
+D, [2015-07-22T10:53:20.416963 #5864] DEBUG -- :   [1m[35m (52.9ms)[0m  CREATE TABLE `fuels` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+D, [2015-07-22T10:53:20.417870 #5864] DEBUG -- :   [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+D, [2015-07-22T10:53:20.418795 #5864] DEBUG -- :   [1m[35mSQL (0.2ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150722000001')
+D, [2015-07-22T10:53:20.427930 #5864] DEBUG -- :   [1m[36m (8.9ms)[0m  [1mCOMMIT[0m
+I, [2015-07-22T10:53:20.428025 #5864]  INFO -- : Migrating to CreateCountries (20150722000002)
+D, [2015-07-22T10:53:20.494895 #5864] DEBUG -- :   [1m[35m (64.1ms)[0m  CREATE TABLE `countries` (`id` int(11) auto_increment PRIMARY KEY, `iso2` varchar(255), `short_name` varchar(255), `long_name` varchar(255), `iso3` varchar(255), `numcode` varchar(255), `un_member` varchar(255), `calling_code` varchar(255), `cctld` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+D, [2015-07-22T10:53:20.495528 #5864] DEBUG -- :   [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+D, [2015-07-22T10:53:20.496143 #5864] DEBUG -- :   [1m[35mSQL (0.1ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150722000002')
+D, [2015-07-22T10:53:20.538673 #5864] DEBUG -- :   [1m[36m (42.3ms)[0m  [1mCOMMIT[0m
+I, [2015-07-22T10:53:20.538770 #5864]  INFO -- : Migrating to CreateCities (20150722000003)
+D, [2015-07-22T10:53:20.605593 #5864] DEBUG -- :   [1m[35m (64.2ms)[0m  CREATE TABLE `cities` (`id` int(11) auto_increment PRIMARY KEY, `country_id` int(11), `region_id` int(11), `name` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+D, [2015-07-22T10:53:20.606213 #5864] DEBUG -- :   [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+D, [2015-07-22T10:53:20.606836 #5864] DEBUG -- :   [1m[35mSQL (0.1ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150722000003')
+D, [2015-07-22T10:53:20.616584 #5864] DEBUG -- :   [1m[36m (9.6ms)[0m  [1mCOMMIT[0m
+I, [2015-07-22T10:53:20.616670 #5864]  INFO -- : Migrating to CreateRegions (20150722000004)
+D, [2015-07-22T10:53:20.683247 #5864] DEBUG -- :   [1m[35m (63.8ms)[0m  CREATE TABLE `regions` (`id` int(11) auto_increment PRIMARY KEY, `country_id` int(11), `name` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+D, [2015-07-22T10:53:20.683885 #5864] DEBUG -- :   [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+D, [2015-07-22T10:53:20.684514 #5864] DEBUG -- :   [1m[35mSQL (0.1ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150722000004')
+D, [2015-07-22T10:53:20.694276 #5864] DEBUG -- :   [1m[36m (9.6ms)[0m  [1mCOMMIT[0m
+D, [2015-07-22T10:54:49.313970 #5888] DEBUG -- :   [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
