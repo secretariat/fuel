@@ -31,8 +31,8 @@ namespace :deploy do
   end
 
   task :symlink_shared do
-    run "ln -nfs #{shared_path}/system/database.yml #{release_path}/config/database.yml"
-    run "ln -nfs #{shared_path}/system/secrets.yml #{release_path}/config/secrets.yml"
+    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    run "ln -nfs #{shared_path}/config/secrets.yml #{release_path}/config/secrets.yml"
     # run "ln -nfs #{shared_path}/output #{release_path}/public/output"
   end
 
