@@ -32,13 +32,20 @@ class Price < ActiveRecord::Base
 
 					region_id = Region.get_or_create_ua( region )
 					tm_id = Trademark.get_or_create_ua( td[0].text, td[1].text )
-					Price.update_or_create( :country_id => 233, :region_id => region_id, :city_id => 0, :trademark_id => tm_id, :fuel_type_id => 1, :cost => td[2].text )
-					Price.update_or_create( :country_id => 233, :region_id => region_id, :city_id => 0, :trademark_id => tm_id, :fuel_type_id => 2, :cost => td[3].text )
-					Price.update_or_create( :country_id => 233, :region_id => region_id, :city_id => 0, :trademark_id => tm_id, :fuel_type_id => 3, :cost => td[4].text )
-					Price.update_or_create( :country_id => 233, :region_id => region_id, :city_id => 0, :trademark_id => tm_id, :fuel_type_id => 4, :cost => td[5].text )
-					Price.update_or_create( :country_id => 233, :region_id => region_id, :city_id => 0, :trademark_id => tm_id, :fuel_type_id => 5, :cost => td[6].text )
-					Price.update_or_create( :country_id => 233, :region_id => region_id, :city_id => 0, :trademark_id => tm_id, :fuel_type_id => 6, :cost => td[7].text )
 
+					1.upto(6) do |n|
+						price = {
+							:country_id => 233,
+							:region_id => region_id,
+							:city_id => 0,
+							:trademark_id => tm_id,
+							:fuel_type_id => n,
+						}
+						obj = Price.where(price)
+						cost =  td[n+1].text.size > 0 ? td[n+1].text.gsub!(",",".") : 0
+						price[:cost] = '%.2f' % cost
+						obj.update_or_create( price )
+					end
 				end
 			end
 		end

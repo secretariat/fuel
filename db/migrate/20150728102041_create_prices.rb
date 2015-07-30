@@ -7,7 +7,7 @@ class CreatePrices < ActiveRecord::Migration
       t.integer :city_id
       t.integer :trademark_id
       t.integer :fuel_type_id
-      t.float :cost
+      t.float :cost, :precision=> 3, :default=>0
 
       t.timestamps null: false
     end

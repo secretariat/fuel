@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     namespace :v1 do
 
       resources :fuel_types
+      resources :trademarks
 
       resources :langs do
         resources :regions

@@ -6,7 +6,7 @@ class Api::V1::CountriesController < ApplicationController
   # GET /countries
   # GET /countries.json
   def index
-    @countries = Country.all
+    @countries = Country.active
   end
 
   # GET /countries/1

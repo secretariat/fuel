@@ -55,9 +55,9 @@ ActiveRecord::Schema.define(version: 20150729112440) do
     t.integer  "city_id",      limit: 4
     t.integer  "trademark_id", limit: 4
     t.integer  "fuel_type_id", limit: 4
-    t.float    "cost",         limit: 24
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.float    "cost",         limit: 24, default: 0.0
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
 
   create_table "regions", force: :cascade do |t|
