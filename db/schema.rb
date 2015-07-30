@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150728102041) do
+ActiveRecord::Schema.define(version: 20150729112440) do
 
   create_table "cities", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -31,11 +31,19 @@ ActiveRecord::Schema.define(version: 20150728102041) do
     t.string   "un_member",    limit: 255
     t.string   "calling_code", limit: 255
     t.string   "cctld",        limit: 255
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.boolean  "active",       limit: 1,   default: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
 
   create_table "fuel_types", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.integer  "lang_id",    limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "langs", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
@@ -63,7 +71,7 @@ ActiveRecord::Schema.define(version: 20150728102041) do
   create_table "trademarks", force: :cascade do |t|
     t.string   "name",          limit: 255
     t.string   "operator_name", limit: 255
-    t.string   "lang_id",       limit: 255
+    t.string   "country_id",    limit: 255
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end

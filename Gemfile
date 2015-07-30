@@ -8,6 +8,7 @@ gem 'therubyracer', platforms: :ruby
 gem "twitter-bootstrap-rails"
 gem 'nokogiri'
 gem 'whenever', :require => false
+gem 'capistrano', '~> 2.15.5'
 
 gem 'mysql2'
 gem 'sass-rails', '~> 5.0'

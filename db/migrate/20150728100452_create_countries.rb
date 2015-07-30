@@ -10,6 +10,7 @@ class CreateCountries < ActiveRecord::Migration
       t.string :un_member
       t.string :calling_code
       t.string :cctld
+      t.boolean :active, :default => false
 
       t.timestamps null: false
     end

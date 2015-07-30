@@ -1,7 +1,14 @@
 # -*- encoding : utf-8 -*-
 require "nokogiri"
 require "open-uri"
+
 class Price < ActiveRecord::Base
+
+	belongs_to :country
+	belongs_to :city
+	belongs_to :region
+	belongs_to :trademark
+	belongs_to :fuel_type
 
 	def self.get_price_ua
 		html = open("http://index.minfin.com.ua/fuel/detail.php")
@@ -24,7 +31,7 @@ class Price < ActiveRecord::Base
 				unless td[0].nil?
 
 					region_id = Region.get_or_create_ua( region )
-					tm_id = Trademark.get_or_create( td[0].text, td[1].text )
+					tm_id = Trademark.get_or_create_ua( td[0].text, td[1].text )
 					Price.update_or_create( :country_id => 233, :region_id => region_id, :city_id => 0, :trademark_id => tm_id, :fuel_type_id => 1, :cost => td[2].text )
 					Price.update_or_create( :country_id => 233, :region_id => region_id, :city_id => 0, :trademark_id => tm_id, :fuel_type_id => 2, :cost => td[3].text )
 					Price.update_or_create( :country_id => 233, :region_id => region_id, :city_id => 0, :trademark_id => tm_id, :fuel_type_id => 3, :cost => td[4].text )

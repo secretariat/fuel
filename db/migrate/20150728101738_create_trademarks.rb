@@ -4,7 +4,7 @@ class CreateTrademarks < ActiveRecord::Migration
     create_table :trademarks do |t|
       t.string :name
       t.string :operator_name
-      t.string :lang_id
+      t.string :country_id
 
       t.timestamps null: false
     end
