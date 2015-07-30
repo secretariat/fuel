@@ -5,7 +5,7 @@ class Api::V1::RegionsController < ApplicationController
   # GET /regions
   # GET /regions.json
   def index
-    @regions = Region.where( :lang_id => params[:lang_id] )
+    @regions = Region.where( :lang_id => params[:lang_id], :country_id => params[:country_id])
   end
 
   # GET /regions/1

@@ -16,11 +16,16 @@ Rails.application.routes.draw do
     namespace :v1 do
 
       resources :fuel_types
-      resources :trademarks
+
+      resources :countries do
+        resources :trademarks
+      end
 
       resources :langs do
-        resources :regions
-        resources :cities
+        resources :countries do
+          resources :regions
+          resources :cities
+        end
       end
 
       resources :countries do
