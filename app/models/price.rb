@@ -70,15 +70,15 @@ class Price < ActiveRecord::Base
 		key = page.at('input[@type="hidden"]')['name']
 		value = page.at('input[@type="hidden"]')['value']
 		cookie = init.meta['set-cookie'].split('; ', 2)[0]
-		uri = URI("http://igas.com.ua/ajax/get_fuel.json")
+		uri = URI.parse("http://igas.com.ua/ajax/get_fuel.json")
 
-		2.upto(25) do |region_id|
-			region_db = (region_id > 10) ? (region_id + 1) : region_id
+		2.upto(26) do |region_id|
+			area = (region_id >= 11) ? (region_id - 1) : region_id
 
-			r_id = Region.find(region_db).id
-			data = "date=2015-08-11&area=#{region_id}&station=average&#{key}=#{value}"
+			r_id = Region.find(region_id).id
+			data = "date=2015-08-11&area=#{area}&station=average&#{key}=#{value}"
 
-			req = Net::HTTP::Post.new(uri)
+			req = Net::HTTP::Post.new(uri.path)
 			req.add_field('Cookie', cookie)
 			req.add_field('X-Requested-With', "XMLHttpRequest")
 			req.body = data
