@@ -75,7 +75,7 @@ class Price < ActiveRecord::Base
 		2.upto(25) do |region_id|
 			region_db = (region_id > 10) ? (region_id + 1) : region_id
 
-			Region.find(region_db).name
+			r_id = Region.find(region_db).id
 			data = "date=2015-08-11&area=#{region_id}&station=average&#{key}=#{value}"
 
 			req = Net::HTTP::Post.new(uri)
@@ -89,10 +89,25 @@ class Price < ActiveRecord::Base
 
 			js = JSON.parse(res.body)
 			price_blocks = js['message'].values[0]
+			lpg_tm_id = 0
+			lpg_price = 0.0
 			price_blocks.each do |pb|
+				pb['brand_name'] = "KLO" if pb['brand_name'] == "КЛО"
+				if lpg_tm = Trademark.where("name LIKE ?", "%#{pb['brand_name'].split(" ")[0]}%").first
+					lpg_tm_id = lpg_tm.id
+				end
 				lpg_price = eval(pb['price_fuel'].gsub(":","=>"))['gas']
+				price = {
+								:country_id => 233,
+								:region_id => r_id,
+								:city_id => 0,
+								:trademark_id => lpg_tm_id,
+								:fuel_type_id => 6,
+							}
+				obj = Price.where(price)
+				price[:cost] = '%.2f' % lpg_price
+				obj.update_or_create( price )
 			end
-		
 		end
 
 	end
