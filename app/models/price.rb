@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 require "nokogiri"
 require "open-uri"
+require "net/http"
+require "json"
 
 class Price < ActiveRecord::Base
 
@@ -59,5 +61,39 @@ class Price < ActiveRecord::Base
 	  obj = first || new
 	  obj.assign_attributes(attributes)
 	  obj
+	end
+
+
+	def self.get_lpg_alt
+		init = open( "http://igas.com.ua/#date=2015-08-11&area=2&station=average" )
+		page = Nokogiri::HTML(init.read)
+		key = page.at('input[@type="hidden"]')['name']
+		value = page.at('input[@type="hidden"]')['value']
+		cookie = init.meta['set-cookie'].split('; ', 2)[0]
+		uri = URI("http://igas.com.ua/ajax/get_fuel.json")
+
+		2.upto(25) do |region_id|
+			region_db = (region_id > 10) ? (region_id + 1) : region_id
+
+			Region.find(region_db).name
+			data = "date=2015-08-11&area=#{region_id}&station=average&#{key}=#{value}"
+
+			req = Net::HTTP::Post.new(uri)
+			req.add_field('Cookie', cookie)
+			req.add_field('X-Requested-With', "XMLHttpRequest")
+			req.body = data
+
+			res = Net::HTTP.start(uri.hostname, uri.port) do |http|
+	  		http.request(req)
+			end
+
+			js = JSON.parse(res.body)
+			price_blocks = js['message'].values[0]
+			price_blocks.each do |pb|
+				lpg_price = eval(pb['price_fuel'].gsub(":","=>"))['gas']
+			end
+		
+		end
+
 	end
 end

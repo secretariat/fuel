@@ -41,4 +41,8 @@ namespace :deploy do
     run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec rake sitemap:refresh"
   end
 
+  task :update_crontab do  
+    run "cd #{release_path} && whenever --update-crontab #{application}"  
+  end  
+
 end

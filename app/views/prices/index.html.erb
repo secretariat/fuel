@@ -21,10 +21,10 @@
       <tr>
         <td><%= link_to price.id, price_path(price) %></td>
         <td><%= price.country_id %></td>
-        <td><%= price.region_id %></td>
+        <td><%= price.region.name %></td>
         <td><%= price.city_id %></td>
-        <td><%= price.trademark_id %></td>
-        <td><%= price.fuel_type_id %></td>
+        <td><%= price.trademark.name %></td>
+        <td><%= price.fuel_type.name %></td>
         <td><%= price.cost %></td>
         <td><%=l price.created_at %></td>
         <td>

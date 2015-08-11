@@ -1,4 +1,5 @@
 # -*- encoding : utf-8 -*-
+require "whenever/capistrano"
 require 'capistrano/ext/multistage'
 require "bundler/capistrano"
 
@@ -20,7 +21,8 @@ set :default_stage, "production"
 
 after "deploy","deploy:bundle"
 after "deploy:bundle", "deploy:symlink_shared"
-after "deploy:symlink_shared", "deploy:assets"
+after "deploy:symlink_shared", "deploy:update_crontab"  
+after "deploy:update_crontab", "deploy:assets"
 after "deploy:assets", "deploy:migrations"
 after "deploy:migrations", "deploy:restart"
 after "deploy:create_symlink", "deploy:cleanup"
