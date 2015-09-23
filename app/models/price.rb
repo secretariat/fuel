@@ -33,6 +33,9 @@ class Price < ActiveRecord::Base
 				unless td[0].nil?
 
 					region_id = Region.get_or_create_ua( region )
+
+					next if td[0].text.size == 0
+
 					tm_id = Trademark.get_or_create_ua( td[0].text, td[1].text )
 
 					1.upto(6) do |n|
@@ -93,6 +96,7 @@ class Price < ActiveRecord::Base
 			lpg_price = 0.0
 			price_blocks.each do |pb|
 				pb['brand_name'] = "KLO" if pb['brand_name'] == "КЛО"
+				pb['brand_name'] = "Avantage 7" if pb['brand_name'] == "Авантаж 7"
 				if lpg_tm = Trademark.where("name LIKE ?", "%#{pb['brand_name'].split(" ")[0]}%").first
 					lpg_tm_id = lpg_tm.id
 				end
