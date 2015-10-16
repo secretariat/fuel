@@ -34,7 +34,7 @@ class Price < ActiveRecord::Base
 
 					region_id = Region.get_or_create_ua( region )
 
-					next if td[0].text.size == 0
+					next if td[0].text.size <= 2
 
 					tm_id = Trademark.get_or_create_ua( td[0].text, td[1].text )
 

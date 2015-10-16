@@ -3,6 +3,10 @@ require "whenever/capistrano"
 require 'capistrano/ext/multistage'
 require "bundler/capistrano"
 
+set :whenever_command, "bundle exec whenever"
+require "whenever/capistrano"
+
+
 set :application, "fuel"
 set :scm, :git
 set :scm_verbose, true
