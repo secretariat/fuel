@@ -7,7 +7,7 @@ gem 'hirb'
 gem 'therubyracer', platforms: :ruby
 gem "twitter-bootstrap-rails"
 gem 'nokogiri'
-gem 'whenever', :require => false
+gem 'whenever', '~> 0.7', :require => false
 gem 'capistrano', '~> 2.15.5'
 
 gem 'mysql2'
