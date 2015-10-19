@@ -32,9 +32,10 @@ class Price < ActiveRecord::Base
 				td = row.css("td")
 				unless td[0].nil?
 
-					region_id = Region.get_or_create_ua( region )
-
-					next if td[0].text.size <= 2
+					if td[0].text.size.to_i <= 2
+						puts "\t\t\t\n\n\nYESP\n\n\n"
+						next 
+					end
 
 					tm_id = Trademark.get_or_create_ua( td[0].text, td[1].text )
 
