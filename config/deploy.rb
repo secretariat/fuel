@@ -2,6 +2,7 @@
 require "whenever/capistrano"
 require 'capistrano/ext/multistage'
 require "bundler/capistrano"
+require 'whenever/capistrano/recipes'
 require "whenever/capistrano"
 
 
@@ -27,6 +28,7 @@ after "deploy:symlink_shared", "deploy:update_crontab"
 after "deploy:update_crontab", "deploy:assets"
 after "deploy:assets", "deploy:migrations"
 after "deploy:migrations", "deploy:restart"
-after "deploy:create_symlink", "deploy:cleanup"
+after "deploy:create_symlink", 'whenever:update_crontab'
+after "whenever:update_crontab","deploy:cleanup"
 
 set :whenever_command, "bundle exec whenever"
