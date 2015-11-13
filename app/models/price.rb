@@ -31,6 +31,8 @@ class Price < ActiveRecord::Base
 			if start_parsing
 				td = row.css("td")
 				unless td[0].nil?
+					
+					region_id = Region.get_or_create_ua( region )
 
 					if td[0].text.size.to_i <= 2
 						puts "\t\t\t\n\n\nYESP\n\n\n"
