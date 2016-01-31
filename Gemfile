@@ -9,6 +9,7 @@ gem "twitter-bootstrap-rails"
 gem 'nokogiri'
 gem 'whenever', :require => false
 gem 'capistrano', '~> 2.15.5'
+gem 'net-ssh', '~> 2.6.5'
 
 gem 'mysql2', '~> 0.3.20'
 gem 'sass-rails', '~> 5.0'
