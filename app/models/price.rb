@@ -13,7 +13,7 @@ class Price < ActiveRecord::Base
 	belongs_to :fuel_type
 
 	def self.get_price_ua
-		html = open("http://index.minfin.com.ua/fuel/detail.php")
+		html = open("http://index.minfin.com.ua/fuel/detail.php").read
 		page = Nokogiri::HTML(html.read)
 		page.encoding = 'utf-8'
 		rows = page.css("tr")

@@ -1,0 +1,14 @@
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'spec/**/*'
+  RunRailsCops: true
+Metrics/LineLength:
+  Max: 120
+Metrics/MethodLength:
+  CountComments: false
+  Max: 12
+Documentation:
+  Enabled: false

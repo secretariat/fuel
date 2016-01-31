@@ -8,7 +8,7 @@
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:operator_name) %></th>
-      <th><%= model_class.human_attribute_name(:lang_id) %></th>
+      <!-- <th><%= model_class.human_attribute_name(:lang_id) %></th> -->
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -16,10 +16,10 @@
   <tbody>
     <% @trademarks.each do |trademark| %>
       <tr>
-        <td><%= link_to trademark.id, trademark_path(trademark) %></td>
-        <td><%= trademark.name %></td>
+        <td><%= trademark.id %></td>
+        <td><%= link_to trademark.name, trademark_path(trademark) %></td>
         <td><%= trademark.operator_name %></td>
-        <td><%= trademark.lang_id %></td>
+        <!-- <td><%#= trademark.lang_id %></td> -->
         <td><%=l trademark.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),

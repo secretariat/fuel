@@ -1,0 +1,2 @@
+https://search-maps.yandex.ru/v1/?text=wog&lang=ru_RU&apikey=82e75164-f557-47a6-a818-ef5fbf4a32ae
+https://maps.googleapis.com/maps/api/place/textsearch/json?query=%D0%92%D0%9E%D0%93&key=AIzaSyAIidxmtzcBu3040UGxu7HRdRwKOnq-r6E&location=50.448157,30.526120&radius=50000

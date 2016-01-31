@@ -2,31 +2,31 @@
   <div class="control-group">
     <%= f.label :country_id, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :country_id, :class => 'text_field' %>
+      <%= f.select :country_id, options_from_collection_for_select( Country.all, "id", "long_name", @price.country_id), {:include_blank=>"Choose country" }, {:class => "form-control"} %>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :region_id, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :region_id, :class => 'text_field' %>
+      <%= f.select :region_id, options_from_collection_for_select( Region.all, "id", "name", @price.region_id), {:include_blank=>"Choose region" }, {:class => "form-control"} %>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :city_id, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :city_id, :class => 'text_field' %>
+      <%= f.select :city_id, options_from_collection_for_select( City.all, "id", "name", @price.city_id), {:include_blank=>"Choose city" }, {:class => "form-control"} %>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :trademark_id, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :trademark_id, :class => 'text_field' %>
+      <%= f.select :trademark_id, options_from_collection_for_select( Trademark.all, "id", "name", @price.trademark_id), {:include_blank=>"Choose trademark" }, {:class => "form-control"} %>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :fuel_type_id, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :fuel_type_id, :class => 'text_field' %>
+      <%= f.select :fuel_type_id, options_from_collection_for_select( FuelType.all, "id", "name", @price.fuel_type_id), {:include_blank=>"Choose fuel type" }, {:class => "form-control"} %>
     </div>
   </div>
   <div class="control-group">

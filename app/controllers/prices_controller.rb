@@ -13,17 +13,13 @@ class PricesController < ApplicationController
   def show
   end
 
-  # GET /prices/new
   def new
     @price = Price.new
   end
 
-  # GET /prices/1/edit
   def edit
   end
 
-  # POST /prices
-  # POST /prices.json
   def create
     @price = Price.new(price_params)
 
@@ -38,12 +34,10 @@ class PricesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /prices/1
-  # PATCH/PUT /prices/1.json
   def update
     respond_to do |format|
       if @price.update(price_params)
-        format.html { redirect_to @price, notice: 'Price was successfully updated.' }
+        format.html { redirect_to trademark_path(@price.trademark_id), notice: 'Price was successfully updated.' }
         format.json { render :show, status: :ok, location: @price }
       else
         format.html { render :edit }
@@ -52,8 +46,6 @@ class PricesController < ApplicationController
     end
   end
 
-  # DELETE /prices/1
-  # DELETE /prices/1.json
   def destroy
     @price.destroy
     respond_to do |format|
@@ -63,12 +55,10 @@ class PricesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_price
       @price = Price.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def price_params
       params.require(:price).permit(:country_id, :region_id, :city_id, :trademark_id, :fuel_type_id, :cost)
     end

@@ -11,6 +11,8 @@ class TrademarksController < ApplicationController
   # GET /trademarks/1
   # GET /trademarks/1.json
   def show
+    @prices = @trademark.prices
+    render 'prices/index'
   end
 
   # GET /trademarks/new
