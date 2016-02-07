@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <center>
+      <h3>Вы получили вопрос от <%= @data.fio %></h3>
+    </center>
+    <b>Email:</b> <%= @data.email %><br/>
+    <b>Номер телефона:</b> <%= @data.phone %><br/>
+    <b>Тема:</b> <%= @data.subject %><br/>
+    <b>Текст вопроса:</b><br/>
+    <p align="justify">
+        <%= @data.message %>
+    </p>
+  </body>
+</html>
