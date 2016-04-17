@@ -37,6 +37,7 @@ class PricesController < ApplicationController
   def update
     respond_to do |format|
       if @price.update(price_params)
+        @price.update(:city_id => 0)
         format.html { redirect_to trademark_path(@price.trademark_id), notice: 'Price was successfully updated.' }
         format.json { render :show, status: :ok, location: @price }
       else
