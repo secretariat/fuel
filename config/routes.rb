@@ -19,7 +19,9 @@ Rails.application.routes.draw do
       resources :requests
 
       resources :countries do
-        resources :trademarks
+        resources :trademarks do
+          resources :locations
+        end
       end
 
       resources :langs do
