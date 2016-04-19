@@ -36,14 +36,19 @@ class Location < ActiveRecord::Base
 	def self.get_points(trademark)
 		
 		source = "https://search-maps.yandex.ru/v1/?text=\"АЗС #{trademark.name}\"&type=biz&lang=ru_RU&results=1000&ll=26.813995143182623,48.80256086458314&spn=33.0908203125,12.010880536889303&apikey=82e75164-f557-47a6-a818-ef5fbf4a32ae"
-		# source = "https://search-maps.yandex.ru/v1/?text=#{trademark}&type=biz&lang=ru_RU&results=1000&ll=26.813995143182623%2C48.80256086458314&spn=33.0908203125%2C12.010880536889303&apikey=82e75164-f557-47a6-a818-ef5fbf4a32ae"
 		escaped_url = URI.escape(source)
-		resp = Net::HTTP.get_response(URI.parse(escaped_url))
-		data = resp.body
-		locations = JSON.parse(data)
+		# resp = Net::HTTP.get_response(URI.parse(escaped_url))
+		# data = resp.body
+		# locations = JSON.parse(data)
 
-		puts locations['features'].size
-		# return
+		uri = URI.parse(escaped_url)
+		http = Net::HTTP.new(uri.host, uri.port)
+		http.use_ssl = true
+
+		request = Net::HTTP::Get.new(uri.request_uri)
+
+		response = http.request(request)
+		locations = JSON.parse(response.body)
 
 		locations['features'].each do |location|
 			loc = {}
