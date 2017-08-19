@@ -6,7 +6,8 @@ class Api::V1::PricesController < ApplicationController
   # GET /prices.json
   def index
     region_id = (params[:region_id].to_i == 9) ? 10 : params[:region_id]
-    @prices = Price.where(:country_id => params[:country_id], :region_id => region_id, :city_id => params[:city_id]).where("updated_at >= ?", 1.week.ago)
+    # @prices = Price.where(:country_id => params[:country_id], :region_id => region_id, :city_id => params[:city_id]).where("updated_at >= ?", 1.week.ago)
+    puts @prices = Price.includes(:trademark).where(:country_id => params[:country_id], :region_id => region_id, :city_id => params[:city_id]).where("prices.updated_at >= ?", 1.week.ago).where(:trademarks => { active: true } )
   end
 
   # GET /prices/1

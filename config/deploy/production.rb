@@ -8,7 +8,7 @@ default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
 ssh_options[:auth_methods] = ["publickey"]
 ssh_options[:port] = 2200
-ssh_options[:keys] = ["#{ENV['HOME']}/install/ruby/amazon/vps.pem"]
+ssh_options[:keys] = ["#{ENV['HOME']}/install/amazon/vps.pem"]
 
 set :deploy_to, "/home/user/www/sites/fuel"
 

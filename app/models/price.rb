@@ -4,6 +4,8 @@ require "open-uri"
 require "net/http"
 require "json"
 
+# scope :active, -> { where(:active => true) }
+
 class Price < ActiveRecord::Base
 
 	belongs_to :country
