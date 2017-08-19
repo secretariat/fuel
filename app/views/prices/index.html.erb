@@ -23,7 +23,8 @@
         <td><%= price.country_id %></td>
         <td><%= price.region.name %></td>
         <td><%= price.city_id %></td>
-        <td><%= price.trademark.name %></td>
+        <td><%= "" %></td>
+        <td><%#= price.trademark.name.nil? ? price.trademark.name : "" %></td>
         <td><%= price.fuel_type.name %></td>
         <td><%= price.cost %></td>
         <td><%=l price.created_at %></td>

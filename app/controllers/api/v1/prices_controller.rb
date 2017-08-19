@@ -5,7 +5,8 @@ class Api::V1::PricesController < ApplicationController
   # GET /prices
   # GET /prices.json
   def index
-    @prices = Price.where(:country_id => params[:country_id], :region_id => params[:region_id], :city_id => params[:city_id])
+    region_id = (params[:region_id].to_i == 9) ? 10 : params[:region_id]
+    @prices = Price.where(:country_id => params[:country_id], :region_id => region_id, :city_id => params[:city_id]).where("updated_at >= ?", 1.week.ago)
   end
 
   # GET /prices/1

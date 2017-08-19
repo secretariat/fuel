@@ -13,7 +13,7 @@ class Price < ActiveRecord::Base
 	belongs_to :fuel_type
 
 	def self.get_price_ua
-		html = open("http://index.minfin.com.ua/fuel/detail.php").read
+		html = open("http://index.minfin.com.ua/fuel/detail.php")
 		page = Nokogiri::HTML(html.read)
 		page.encoding = 'utf-8'
 		rows = page.css("tr")
@@ -41,17 +41,19 @@ class Price < ActiveRecord::Base
 
 					tm_id = Trademark.get_or_create_ua( td[0].text, td[1].text )
 
-					1.upto(6) do |n|
+					1.upto(5) do |n|
 						price = {
 							:country_id => 233,
 							:region_id => region_id,
 							:city_id => 0,
 							:trademark_id => tm_id,
-							:fuel_type_id => n,
+							:fuel_type_id => n+1,
 						}
 						obj = Price.where(price)
+						# next if !td[n+1].text
 						cost =  td[n+1].text.size > 0 ? td[n+1].text.gsub!(",",".") : 0
 						price[:cost] = '%.2f' % cost
+						puts price
 						obj.update_or_create( price )
 					end
 				end

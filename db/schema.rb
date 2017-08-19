@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160417144831) do
+ActiveRecord::Schema.define(version: 20170819085002) do
 
   create_table "cities", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20160417144831) do
   create_table "prices", force: :cascade do |t|
     t.integer  "country_id",   limit: 4
     t.integer  "region_id",    limit: 4
-    t.integer  "city_id",      limit: 4,  default: 0
+    t.integer  "city_id",      limit: 4
     t.integer  "trademark_id", limit: 4
     t.integer  "fuel_type_id", limit: 4
     t.float    "cost",         limit: 24, default: 0.0
@@ -85,8 +85,9 @@ ActiveRecord::Schema.define(version: 20160417144831) do
     t.string   "name",          limit: 255
     t.string   "operator_name", limit: 255
     t.string   "country_id",    limit: 255
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.boolean  "active",        limit: 1,   default: true
   end
 
 end
