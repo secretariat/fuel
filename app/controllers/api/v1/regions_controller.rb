@@ -5,7 +5,7 @@ class Api::V1::RegionsController < ApplicationController
   # GET /regions
   # GET /regions.json
   def index
-    @regions = Region.where( :lang_id => params[:lang_id], :country_id => params[:country_id])
+    @regions = Region.where( :lang_id => params[:lang_id], :country_id => params[:country_id]).active
   end
 
   # GET /regions/1
@@ -70,6 +70,6 @@ class Api::V1::RegionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def region_params
-      params.require(:region).permit(:name, :lang_id, :country_id)
+      params.require(:region).permit(:name, :lang_id, :country_id, :active)
     end
 end

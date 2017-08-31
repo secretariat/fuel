@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 class Region < ActiveRecord::Base
 
+	scope :active, -> { where(:active => true) }
+
 	has_many :prices
 
 	def self.get_or_create_ua( region_name )

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170819085002) do
+ActiveRecord::Schema.define(version: 20170831073001) do
 
   create_table "cities", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -77,8 +77,9 @@ ActiveRecord::Schema.define(version: 20170819085002) do
     t.string   "name",       limit: 255
     t.integer  "lang_id",    limit: 4
     t.integer  "country_id", limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.boolean  "active",     limit: 1,   default: true
   end
 
   create_table "trademarks", force: :cascade do |t|
