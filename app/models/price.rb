@@ -64,11 +64,19 @@ class Price < ActiveRecord::Base
 	end
 
 	def self.update_or_create(attributes)
-	  assign_or_new(attributes).save
+		obj = assign_or_new(attributes)
+		if obj.new_record?
+		  obj.save
+		else
+		  obj.touch
+		end
 	end
 
 	def self.assign_or_new(attributes)
 	  obj = first || new
+	  # puts "========="
+	  # puts obj.inspect
+	  # puts "========="
 	  obj.assign_attributes(attributes)
 	  obj
 	end
