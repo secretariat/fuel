@@ -7,5 +7,5 @@ json.array!(@prices) do |price|
   json.trademark_id price.trademark_id
   json.fuel_type_id price.fuel_type_id
   json.cost price.cost
-  json.updated_at price.updated_at.to_i
+  json.updated_date price.updated_at.to_i
 end
