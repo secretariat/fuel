@@ -8,6 +8,7 @@ require "json"
 
 class Price < ActiveRecord::Base
 
+
 	belongs_to :country
 	belongs_to :city
 	belongs_to :region
@@ -15,7 +16,16 @@ class Price < ActiveRecord::Base
 	belongs_to :fuel_type
 
 	def self.get_price_ua
-		html = open("http://index.minfin.com.ua/fuel/detail.php")
+
+		fuels = {
+			1 => 4, #95+
+			2 => 3, #95
+			3 => 2, #92
+			4 => 5, #Diesel
+			5 => 6, #LPG
+		}
+
+		html = open("https://index.minfin.com.ua/fuel/detail.php")
 		page = Nokogiri::HTML(html.read)
 		page.encoding = 'utf-8'
 		rows = page.css("tr")
@@ -29,7 +39,6 @@ class Price < ActiveRecord::Base
 					start_parsing = true
 				end
 			end
-
 			if start_parsing
 				td = row.css("td")
 				unless td[0].nil?
@@ -49,13 +58,14 @@ class Price < ActiveRecord::Base
 							:region_id => region_id,
 							:city_id => 0,
 							:trademark_id => tm_id,
-							:fuel_type_id => n+1,
+							:fuel_type_id => fuels[n],
 						}
 						obj = Price.where(price)
 						# next if !td[n+1].text
-						cost =  td[n+1].text.size > 0 ? td[n+1].text.gsub!(",",".") : 0
+						FuelType.find(fuels[n]).name
+						cost =  td[n].text.size > 0 ? td[n].text.gsub!(",",".") : 0
 						price[:cost] = '%.2f' % cost
-						puts price
+						# puts price
 						obj.update_or_create( price )
 					end
 				end
@@ -68,6 +78,7 @@ class Price < ActiveRecord::Base
 		if obj.new_record?
 		  obj.save
 		else
+			obj.save
 		  obj.touch
 		end
 	end
