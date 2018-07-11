@@ -9,6 +9,7 @@ require "whenever/capistrano"
 set :application, "fuel"
 set :scm, :git
 set :scm_verbose, true
+set :deploy_user, "ruby"
 
 set :default_shell, '/bin/bash -l'
 
@@ -17,7 +18,8 @@ set :branch, 'develop'
 
 set :deploy_via, :copy
 set :use_sudo, false
-set :keep_releases, 5
+set :keep_releases, 10
+set :rvm_ruby_version, '1.9.3-p547'
 
 set :stages, ["staging", "production"]
 set :default_stage, "production"

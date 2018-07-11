@@ -1,16 +1,15 @@
-role :web, "185.16.40.109"
-role :app, "185.16.40.109"
-role :db,  "185.16.40.109", :primary => true
-role :db,  "185.16.40.109"
+role :web, "vs03.citrusdev.com.ua"
+role :app, "vs03.citrusdev.com.ua"
+role :db,  "vs03.citrusdev.com.ua", :primary => true
+role :db,  "vs03.citrusdev.com.ua"
 
-set :user, "user"
+set :user, "ruby"
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
-ssh_options[:auth_methods] = ["publickey"]
-ssh_options[:port] = 2200
-ssh_options[:keys] = ["#{ENV['HOME']}/install/amazon/vps.pem"]
+ssh_options[:auth_methods] = ["password"]
+ssh_options[:port] = 22
 
-set :deploy_to, "/home/user/www/sites/fuel"
+set :deploy_to, "/home/ruby/www/fuel.citrusdev.com.ua"
 
 namespace :deploy do
 

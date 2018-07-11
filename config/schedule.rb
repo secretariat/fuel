@@ -13,7 +13,7 @@
 #   rake "some:great:rake:task"
 # end
 #
-every 6.hours do
+every 12.hours do
   runner "Price.get_price_ua"
 end
 

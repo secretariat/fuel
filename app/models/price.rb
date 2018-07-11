@@ -18,11 +18,11 @@ class Price < ActiveRecord::Base
 	def self.get_price_ua
 
 		fuels = {
-			1 => 4, #95+
-			2 => 3, #95
-			3 => 2, #92
-			4 => 5, #Diesel
-			5 => 6, #LPG
+			2 => 4, #95+
+			3 => 3, #95
+			4 => 2, #92
+			5 => 5, #Diesel
+			6 => 6, #LPG
 		}
 
 		html = open("https://index.minfin.com.ua/fuel/detail.php")
@@ -41,18 +41,18 @@ class Price < ActiveRecord::Base
 			end
 			if start_parsing
 				td = row.css("td")
-				unless td[0].nil?
-					
+				unless td[0].nil?	|| td[1].nil?
+
 					region_id = Region.get_or_create_ua( region )
 
 					if td[0].text.size.to_i <= 2
 						puts "\t\t\t\n\n\nYESP\n\n\n"
-						next 
+						next
 					end
-
+					
 					tm_id = Trademark.get_or_create_ua( td[0].text, td[1].text )
 
-					1.upto(5) do |n|
+					2.upto(6) do |n|
 						price = {
 							:country_id => 233,
 							:region_id => region_id,
@@ -61,12 +61,15 @@ class Price < ActiveRecord::Base
 							:fuel_type_id => fuels[n],
 						}
 						obj = Price.where(price)
-						# next if !td[n+1].text
-						FuelType.find(fuels[n]).name
-						cost =  td[n].text.size > 0 ? td[n].text.gsub!(",",".") : 0
+
+						next if td[n].nil?
+						next unless td[n].text =~ /^(?!-0$)[+-]?([1-9]\d*|0)(\,\d+)?$/
+
+						puts cost =  td[n].text.size > 0 ? td[n].text.gsub!(",",".") : 0
 						price[:cost] = '%.2f' % cost
-						# puts price
+
 						obj.update_or_create( price )
+
 					end
 				end
 			end
